@@ -1,19 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+// 古い
+// import { BrowserRouter, Route, Switch }  from 'react-router-dom';
+import { BrowserRouter, Route, Routes,  }  from 'react-router-dom';
+
+
 import './index.css';
 import reducer from './reducers';
-import EventIndex from './components/events_index';
+import EventsIndex from './components/events_index';
+import EventsNew from './components/events_new';
 import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
-    <EventIndex />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/events/new" element={<EventsNew />} /> 
+        <Route path="/" element={<EventsIndex />} />
+      </Routes>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'));
 reportWebVitals();
